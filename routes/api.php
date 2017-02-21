@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::resource('sellers','SellersController');
 
 Route::post('/sellers/{id}/addresses','AddressController@create');

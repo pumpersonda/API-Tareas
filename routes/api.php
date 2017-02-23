@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('sellers','SellersController');
+Route::patch('/sellers/{id}','SellersController@modify');
 
-Route::post('/sellers/{id}/addresses','AddressController@create');
+Route::resource('products','ProductController');
+Route::patch('/products/{id}','ProductController@modify');
 
-Route::put('/sellers/{id}/addresses','AddressController@update');
+Route::get('/products/{product_id}/reviews','ReviewsController@index');
+Route::get('/products/{product_id}/reviews/{id}','ReviewsController@show');
+Route::post('/products/{product_id}/reviews','ReviewsController@store');
 
-Route::resource('/sellers/{id}/products','ProductController');
-
-Route::get('/products/{id}/reviews','ReviewsController@index');
-
-Route::post('/products/{id}/reviews','ReviewsController@create');

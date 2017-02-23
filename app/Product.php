@@ -14,7 +14,7 @@ class Product extends Model
     }
 
     public function seller(){
-        return $this->belongsTo(Review::class);
+        return $this->belongsTo(Seller::class);
     }
 
     public function review(){

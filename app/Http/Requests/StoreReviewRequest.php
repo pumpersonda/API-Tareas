@@ -1,10 +1,17 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Andre
+ * Date: 22/02/2017
+ * Time: 09:43 AM
+ */
 
+namespace App\Http\Requests;
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSellerRequest extends FormRequest
+class StoreReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +32,11 @@ class StoreSellerRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required|string',
-            'address_id'=>'required|exists:addresses,id',
-
+            'product_id'=>'required|exists:products,id',
+            'critic_name'=>'required',
+            'title'=>'required',
+            'content'=>'required',
+            'date'=>'required',
         ];
     }
 }

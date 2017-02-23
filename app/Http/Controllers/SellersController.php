@@ -25,16 +25,20 @@ class SellersController extends Controller
         return $seller;
     }
 
-    /**
-     * @param Seller $seller
-     * @return mixed
-     */
+
     public function show(Seller $seller)
     {
-        return Seller::with('address')->find(1);
+        return Seller::with('address')->find($seller->id);
     }
 
-    public function update(Request $request,Seller $seller)
+    public function update(StoreSellerRequest $request,Seller $seller)
+    {
+        $attributes = $request->all();
+        $seller->update($attributes);
+        return $seller;
+    }
+
+    public function modify(StoreSellerRequest $request,Seller $seller)
     {
         $attributes = $request->all();
         $seller->update($attributes);

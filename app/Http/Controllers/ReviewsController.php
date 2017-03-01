@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreReviewRequest;
+use App\Product;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Review;
 use Illuminate\Http\Request;
@@ -12,28 +14,27 @@ class ReviewsController extends Controller
     //
     public function index($product_id)
     {
-        $reviews = DB::table('product_tag')
-            ->where('product_id',$product_id)
-            ->get();
-        return $reviews;
+        return $reviews = DB::table('reviews')
+            ->where('product_id', $product_id)->get();
 
     }
 
-    public function store(StoreReviewRequest $request,$product_id)
+    public function store(StoreReviewRequest $request, $productId)
     {
-
-        $attributes = $request->all();
-        $review = Review::create($attributes);
-        $review->product_id = $product_id;
-        return $review;
+        $product = Product::findOrFail($productId);
+        $review = new Review();
+        $review->fill($request->all());
+        $review->product()->associate($product);
+        $review->save();
+        return response("review added", 200);
     }
 
 
-    public function show(Review $review,$product_id, $id)
+    public function show(Review $review, $product_id, $id)
     {
-        $reviews = DB::table('product_tag')
-            ->where('product_id',$product_id)
-            ->where('tag_id',$id)
+        $reviews = DB::table('reviews')
+            ->where('product_id', $product_id)
+            ->where('id', $id)
             ->get();
         return $reviews;
     }
@@ -42,7 +43,6 @@ class ReviewsController extends Controller
     public function update(StoreReviewRequest $request, Review $review)
     {
         $attributes = $request->all();
-
         $review->update($attributes);
         return $review;
     }
@@ -52,6 +52,13 @@ class ReviewsController extends Controller
         $attributes = $request->all();
         $review->update($attributes);
         return $review;
+    }
+
+
+    public function destroy($productId, $reviewId)
+    {
+        Review::where('product_id', $productId)->where('id', $reviewId)->delete();
+        return response("Review deleted", 200);
     }
 
 }

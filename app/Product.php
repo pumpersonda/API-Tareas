@@ -9,6 +9,10 @@ class Product extends Model
     //
     protected $fillable = ['seller_id','name','price','description'];
 
+    public static function find($id)
+    {
+    }
+
     public function tags(){
     	return $this->belongsToMany(Tag::class);
     }

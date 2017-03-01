@@ -25,8 +25,7 @@ class StoreSellerRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required|string',
-            'address_id'=>'required|exists:addresses,id',
+            'name'=>'required|string'
 
         ];
     }

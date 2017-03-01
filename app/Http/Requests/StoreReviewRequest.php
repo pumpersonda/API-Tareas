@@ -31,12 +31,10 @@ class StoreReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'product_id'=>'required|exists:products,id',
             'critic_name'=>'required',
             'title'=>'required',
             'content'=>'required',
-            'date'=>'required',
+            'date'=>'required'
         ];
     }
 }

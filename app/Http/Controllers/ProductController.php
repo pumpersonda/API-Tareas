@@ -39,15 +39,15 @@ class ProductController extends Controller
             $product->tags()->attach($tag->id);
         }
         return $attributes = $request->all();
-        $product->update($attributes); $product;
+
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
         $product->fill($request->all());
         $product->save();
-        return response("product updated", 201);
+        return $product;
 
 
     }
@@ -57,7 +57,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->fill($request->all());
         $product->save();
-        return response("product updated", 201);
+        return $product;
     }
 
 //NO
@@ -65,7 +65,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $product->delete();
-        return response("product deleted", 200);
+        return response("Product deleted", 200);
     }
 
 }

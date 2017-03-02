@@ -26,7 +26,7 @@ class ReviewsController extends Controller
         $review->fill($request->all());
         $review->product()->associate($product);
         $review->save();
-        return response("review added", 200);
+        return $review;
     }
 
 
@@ -47,7 +47,7 @@ class ReviewsController extends Controller
         return $review;
     }
 
-    public function modify(StoreReviewRequest $request, Review $review)
+    public function modify(Request $request, Review $review)
     {
         $attributes = $request->all();
         $review->update($attributes);

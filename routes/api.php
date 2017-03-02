@@ -25,8 +25,8 @@ Route::patch('/sellers/{id}','SellersController@modify');
 Route::delete('/sellers/{id}','SellersController@destroy');
 
 
-Route::post('/sellers/{id}/address', 'AddressesController@store');
-Route::put('/sellers/{id}/address', 'AddressesController@update');
+Route::post('/sellers/{id}/address', 'AddressController@store');
+Route::put('/sellers/{id}/address', 'AddressController@update');
 
 Route::get('/products','ProductController@index');
 Route::get('/products/{id}','ProductController@show');

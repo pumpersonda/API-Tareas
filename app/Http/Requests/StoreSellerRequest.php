@@ -25,7 +25,8 @@ class StoreSellerRequest extends FormRequest
     {
         return [
             //
-            'name'=>'required|string'
+            'name'=>'required|string',
+
 
         ];
     }

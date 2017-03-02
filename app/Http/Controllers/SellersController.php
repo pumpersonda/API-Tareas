@@ -12,32 +12,31 @@ class SellersController extends Controller
     //
     public function index()
     {
-        $sellers = Seller::all();
-        return $sellers;
+        return Seller::with('address')->get();
 
     }
 
     public function store(StoreSellerRequest $request)
     {
         $attributes = $request->all();
-       Seller::create($attributes);
-        return "Seller created";
+        $seller = Seller::create($attributes);
+        return $seller;
     }
 
 
-    public function show(Seller $seller,$id)
+    public function show(Seller $seller, $id)
     {
         return Seller::with('address')->find($id);
     }
 
-    public function update(StoreSellerRequest $request,Seller $seller)
+    public function update(StoreSellerRequest $request, Seller $seller)
     {
         $attributes = $request->all();
         $seller->update($attributes);
         return $seller;
     }
 
-    public function modify(StoreSellerRequest $request,Seller $seller)
+    public function modify(Request $request, Seller $seller)
     {
         $attributes = $request->all();
         $seller->update($attributes);
@@ -47,7 +46,7 @@ class SellersController extends Controller
     public function destroy(Seller $seller)
     {
         $seller->delete();
-        return Response::json([], $code = 200);
+        return response("Seller deleted", 200);
     }
 
 }
